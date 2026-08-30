@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏</title>
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <style type="text/css">
+        #water_div {
+            background-image: url(https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/deer.jpg);
+            width: 750px;
+            height: 936px;
+            background-color: beige;
+            margin-bottom: 10px;
+        }
+
+        /*https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/maitianyubaishu.jpg*/
+        /*https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/deer.jpg*/
+    </style>
+</head>
+<body>
+<div id="water_div"></div>
+
+<iframe width="400" height="300" frameborder="0" src="https://cdn.abowman.com/widgets/hamster/hamster.html?"></iframe>
+
+<script type="text/javascript" src="../js/jquery.ripples-min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        try {
+            $("#water_div").ripples({
+                resolution: 512,
+                dropRadius: 20,
+                perturbance: 0.04,
+            });
+        } catch (e) {
+            $(".error").show().text(e);
+        }
+// Automatic drops
+        setInterval(function () {
+            var $el = $("#water_div");
+            var x = Math.random() * $el.outerWidth();
+            var y = Math.random() * $el.outerHeight();
+            var dropRadius = 20;
+            var strength = 0.04 + Math.random() * 0.04;
+
+            $el.ripples('drop', x, y, dropRadius, strength);
+        }, 400);
+    });
+</script>
+</body>
+</html>

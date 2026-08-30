@@ -1,0 +1,35 @@
+<article id="<%= post.layout %>-<%= post.slug %>"
+         class="article article-single article-type-<%= post.layout %><%= (post.direction && post.direction.toLowerCase() === 'rtl' ? ' rtl' : '') %>"
+         itemscope itemprop="blogPost">
+    <div class="article-inner">
+        <% if (post.link || post.title) { %>
+            <header class="article-header">
+                <%- partial('post/title', {class_name: 'article-title'}) %>
+            </header>
+        <% } %>
+        <% if (!['page', 'authors', 'tags', 'categories'].includes(post.layout)) { %>
+            <div class="article-meta">
+                <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+                <%- partial('post/author') %>
+                <%- partial('post/tag') %>
+                <%- partial('post/valinecounter') %>
+                <%- partial('post/counter') %>
+                <!--                <p>阅读数量: <span id="<%= url_for(post.path) %>" class="leancloud_visitors"-->
+                <!--                               data-flag-title="<%- post.title %>"></span>次</p>-->
+                <span id="busuanzi_container_page_pv">阅读数量:<span id="busuanzi_value_page_pv"></span>次</span>
+            </div>
+        <% } %>
+        <%- partial('post/gallery') %>
+        <div class="article-entry" itemprop="articleBody">
+            <%- partial('authors', {post: post}) %>
+            <%- partial('tags', {post: post}) %>
+            <%- partial('categories', {post: post}) %>
+            <%- post.content %>
+        </div>
+        <footer class="article-footer">
+            <%- partial('share/index', {post: post}) %>
+        </footer>
+    </div>
+    <%- partial('post/ld_json', {post: post}) %>
+</article>
+<%- partial('comment/index') %>

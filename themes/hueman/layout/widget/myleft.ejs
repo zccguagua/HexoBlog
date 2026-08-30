@@ -1,0 +1,46 @@
+<% if (site.posts.length) { %>
+    <div class="widget-wrap widget-list">
+        <!--<h3 class="widget-title"><%= __('sidebar.myleft') %></h3>-->
+        <!--<div class="widget">-->
+        <!--这里是我的侧边栏哦-->
+        <!--</div>-->
+        <!--        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86-->
+        <!--                src="//music.163.com/outchain/player?type=2&id=26237342&auto=1&height=66"></iframe>-->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86
+                src="//music.163.com/outchain/player?type=2&id=578090&auto=1&height=66"></iframe>
+        <img src="../images/main_wx.png" width=150 height=150>
+
+        <!--天气插件-->
+        <div id="he-plugin-simple" style="width: 300px"></div>
+        <!--天气插件-->
+        <script>
+            WIDGET = {
+                "CONFIG": {
+                    "modules": "01234",
+                    "background": "1",
+                    "tmpColor": "FFFFFF",
+                    "tmpSize": "16",
+                    "cityColor": "FFFFFF",
+                    "citySize": "16",
+                    "aqiColor": "FFFFFF",
+                    "aqiSize": "16",
+                    "weatherIconSize": "24",
+                    "alertIconSize": "18",
+                    "padding": "10px 10px 10px 10px",
+                    "shadow": "0",
+                    "language": "auto",
+                    "fixed": "false",
+                    "vertical": "top",
+                    "horizontal": "left",
+                    "key": "30867faab9634d6692ca70efb12b39ea"
+                }
+            }
+        </script>
+        <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+
+        <script type="text/javascript"
+                src="//rf.revolvermaps.com/0/0/6.js?i=51m7wtzyf42&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80"
+                async="async"></script>
+
+    </div>
+<% } %>

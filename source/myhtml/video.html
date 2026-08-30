@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/mainjsp.css">
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.nicescroll.min.js"></script>
+    <meta charset="utf-8">
+    <title>视频</title>
+    <style type="text/css">
+        body {
+            background-color: #383838;
+        }
+
+        .article-single {
+            padding: 5px;
+        }
+
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .header {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .col-lg-12, .col-md-12 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .article-entry ul {
+            margin-top: 1em;
+            padding-left: 0;
+            font-size: 16px;
+        }
+
+        .article-entry h4 {
+            margin: 0;
+        }
+
+        #videoElement {
+            /*max-height: 800px;*/
+        }
+
+        ul li:not(:first-child) {
+            cursor: pointer;
+
+        }
+
+        ul li :not(:first-child) h5 {
+            cursor: pointer;
+
+        }
+
+        .list-group-item:hover {
+            background: #ebfcff;
+
+        }
+
+        #videoMenu {
+            height: 500px;
+        }
+
+        .article-entry h5 {
+            line-height: 0;
+            margin: 0.5em 0;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="row" style="margin-top: 5px">
+    <div class="col-md-12 col-lg-12">
+        <video id="videoElement" width="100%" controls="true" controlslist="nodownload">
+            网站暂不支持本视频播放，请更新最新版本或更换浏览器
+        </video>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <!--播放列表-->
+
+        <ul id="videoMenu" class="list-group">
+            <li class="list-group-item active li_head">
+                <h5 class="list-group-item-heading">
+                    播放列表
+                </h5>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/funny/doujianwu3.mp4')">
+                <h4 class="list-group-item-heading">
+                    抖肩舞
+                </h4>
+                <p class="list-group-item-text">
+                    视频
+                </p>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/funny/xiaoxueshengpinyin.mp4')">
+                <h4 class="list-group-item-heading">
+                    小学生的散装拼音
+                </h4>
+                <p class="list-group-item-text">
+                    视频
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/RAM_WIRE.mp4')">
+                <h4 class="list-group-item-heading">
+                    《僕らの手には何もないけど》
+                </h4>
+                <p class="list-group-item-text">
+                    MV
+                </p>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/999ganmao.mp4')">
+                <h4 class="list-group-item-heading">
+                    健康本该如此
+                </h4>
+                <p class="list-group-item-text">
+                    999感冒灵广告
+
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/999ganmao2.mp4')">
+                <h4 class="list-group-item-heading">
+                    总有人偷偷爱着你
+                </h4>
+                <p class="list-group-item-text">
+                    999感冒灵广告
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/mother.mp4')">
+                <h4 class="list-group-item-heading">
+                    当我成为了母亲
+
+                </h4>
+                <p class="list-group-item-text">
+                    公益广告
+                </p>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/HomePod.mp4')">
+                <h4 class="list-group-item-heading">
+                    欢迎回家
+
+                </h4>
+                <p class="list-group-item-text">
+                    Home Pod 广告
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'http://image.onepeace.top/Coldplay%20Up%20Up.mp4')">
+                <h4 class="list-group-item-heading">
+                    Up Up
+
+                </h4>
+                <p class="list-group-item-text">
+                    Coldplay
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/Leave_Me.mp4')">
+                <h4 class="list-group-item-heading">
+                    Leave Me
+
+                </h4>
+                <p class="list-group-item-text">
+                    Cannon广告
+                </p>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/huawei.mp4')">
+                <h4 class="list-group-item-heading">
+                    Dream It Possible
+
+                </h4>
+                <p class="list-group-item-text">
+                    华为广告
+                </p>
+            </li>
+
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/mother2.mp4')">
+                <h4 class="list-group-item-heading">
+                    妈妈的等待
+
+                </h4>
+                <p class="list-group-item-text">
+                    公益广告
+
+                </p>
+            </li>
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/Think%20Different.mp4')">
+                <h4 class="list-group-item-heading">
+                    Think Different
+
+                </h4>
+                <p class="list-group-item-text">
+                    苹果广告
+                </p>
+            </li>
+
+            <li class="list-group-item"
+                onclick="flv_switch(this,'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/kaibuliaokou.mp4')">
+                <h4 class="list-group-item-heading">
+                    开不了口
+                </h4>
+                <p class="list-group-item-text">
+                    唯品会广告
+                </p>
+            </li>
+
+
+        </ul>
+
+    </div>
+</div>
+
+<script src="../js/flv.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+    var player = document.getElementById('videoElement');
+    if (flvjs.isSupported()) {
+
+        var flvPlayer = flvjs.createPlayer({
+            type: 'mp4',
+            url: 'https://zccguagua.oss-cn-hangzhou.aliyuncs.com/videos/ad/RAM_WIRE.mp4'
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load(); //加载
+    }
+
+    function flv_switch(li, url) {
+
+        $(".li_head").siblings().css("background", "#ffffff");
+
+        $(li).css("background", "#ebfcff");
+
+
+        player.pause();
+//        player.unload();
+//        player.detachMediaElement();
+//        player.destroy();
+        player = null;
+        player = document.getElementById('videoElement');
+        var flvPlayer = flvjs.createPlayer({
+            type: 'mp4',
+            url: url
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load(); //加载
+        flvPlayer.play();
+
+    }
+
+    document.oncontextmenu = function (e) {
+        return false;
+    };
+    /*禁止F12*/
+    document.onkeydown = function () {
+        if (window.event && window.event.keyCode == 123) {
+            event.keyCode = 0;
+            event.returnValue = false;
+        }
+        if (window.event && window.event.keyCode == 13) {
+            window.event.keyCode = 505;
+            alert(进入);
+        }
+        if (window.event && window.event.keyCode == 8) {
+            alert(str + "\n请使用Del键进行字符的删除操作！");
+            window.event.returnValue = false;
+            alert(空格);
+        }
+        if (window.event && window.event.keyCode == 64) {
+            window.event.returnValue = false;
+            alert(哈哈)
+        }
+    };
+    $("#videoMenu").niceScroll();
+
+</script>
+
+
+</body>
+</html>
