@@ -2,8 +2,17 @@
 title: gitlab安装使用
 date: 2022-05-01 23:27:46
 tags:
-     - gitlab
+     - gitea
 ---
+
+
+### 2026年8月更新-gitea
+gitlab占用内存和消耗过高，可替换成低功耗的**gitea**
+
+[关于gitea](https://docs.gitea.com/zh-cn/)
+
+宝塔docker里面包含了gitea应用直接安装使用即可
+
 
 ### 开始
 想在自己的服务器上搭建一个gitlab,保存代码啥的，发现gitlab要求最低配置2核4g内存，自己的服务器够呛。
