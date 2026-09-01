@@ -45,9 +45,20 @@ tags:
 
 - 一个隧道可以绑定无数个域名和端口
 
+之前的链路：
+```text
+用户 → Cloudflare（灵活模式）→ 宝塔反向代理（监听某个端口）→ 你的服务（:2053）
+```
+这条链路非常脆弱，受制于备案、端口、证书、Cloudflare 回源等一系列问题
+现在的新链路是：
+```text
+用户 → Cloudflare（自动HTTPS）→ Tunnel（加密通道）→ 你的服务（:2053）
+```
+这条新链路完全绕过了宝塔，直接由 cloudflared 把请求转发给本地服务。宝塔在这个过程中已经没有任何作用了，反向代理也可以删除。
+
 ### <span id="cv2">安装 cloudflared</span>
 下载并安装
-bash
+
 #### 下载 cloudflared（如果下载慢，可以换成镜像源）
 ```shell
 wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
@@ -153,9 +164,11 @@ pm2 delete cloudflare-tunnel
 ```
 
 #### 设置开机自启（可选）
-bash
+```shell
 pm2 save
 pm2 startup
+```
+
 
 ### <span id="cv6">多域名多端口配置</span>
 场景：一个隧道绑定多个域名和端口
@@ -239,8 +252,6 @@ cloudflared tunnel run <隧道名>
 
 #### PM2 管理
 ```shell
-
-bash
 # 启动
 pm2 start cloudflared --name "cloudflare-tunnel" -- tunnel run <隧道名>
 
