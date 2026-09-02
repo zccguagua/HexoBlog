@@ -1,6 +1,7 @@
 index:
     home: '主页'
     music: '云音乐'
+    weather: '天气'
     video: '视频'
     image: '图片'
     tree: '时间树'

@@ -5,6 +5,8 @@ menu:
     Categories:
     #音乐
     Music: /myhtml/music.html
+    #天气
+    Weather: /myhtml/weather.html
     #图片
     Image: /myhtml/image.html
     #视频

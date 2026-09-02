@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气</title></title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: #303133;
+            background: #f5f7fa;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .loading {
+            padding: 60px 0;
+            text-align: center;
+            color: #909399;
+        }
+
+        .empty {
+            padding: 60px 0;
+            text-align: center;
+            color: #909399;
+        }
+
+        .block {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .block-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 0 12px;
+        }
+
+        /* 搜索栏 */
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .search-bar input {
+            flex: 1;
+            max-width: 320px;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-bar input:focus {
+            border-color: #409eff;
+        }
+        .search-bar button {
+            height: 36px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 6px;
+            background: #409eff;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .search-bar button:hover { opacity: 0.9; }
+        .search-bar button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* 顶部渐变卡片 */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            color: #fff;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .location {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+        .city {
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .country {
+            font-size: 16px;
+            opacity: 0.85;
+        }
+        .update-time {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+        .today {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 6px;
+        }
+        .today-icon {
+            font-size: 56px;
+            line-height: 1;
+        }
+        .today-wea {
+            font-size: 18px;
+        }
+        .today-temp {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .today-temp .low {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .hero-right {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            padding: 16px 20px;
+            min-width: 260px;
+            align-self: center;
+        }
+        .air-title { font-size: 13px; opacity: 0.85; }
+        .air-level { font-size: 26px; font-weight: 700; margin: 4px 0; }
+        .air-tips { font-size: 13px; opacity: 0.9; margin-bottom: 12px; }
+        .air-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px 16px;
+            margin-bottom: 12px;
+        }
+        .air-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+        .air-item .label { opacity: 0.8; }
+        .air-item .value { font-weight: 600; }
+        .air-advice {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .air-advice span {
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+
+        /* 7天预报 */
+        .forecast {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .forecast-item {
+            flex: 0 0 110px;
+            padding: 14px 10px;
+            border-radius: 10px;
+            text-align: center;
+            background: #f5f7fa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .forecast-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+        .forecast-item.active {
+            background: #e6f4ff;
+            box-shadow: inset 0 0 0 2px #409eff;
+        }
+        .f-day { font-size: 13px; color: #606266; margin-bottom: 6px; }
+        .f-icon { font-size: 30px; margin-bottom: 6px; }
+        .f-wea { font-size: 14px; margin-bottom: 6px; }
+        .f-temp { font-size: 14px; }
+        .f-temp .high { color: #f56c6c; font-weight: 600; margin-right: 6px; }
+        .f-temp .low { color: #409eff; }
+
+        .alarm {
+            background: #fdf6ec;
+            color: #e6a23c;
+            border-left: 4px solid #e6a23c;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        .alarm .alarm-head { font-weight: 600; margin-bottom: 4px; }
+
+        /* 详情指标 */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .metric {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .metric.wide { grid-column: span 3; }
+        .m-label { font-size: 12px; color: #909399; }
+        .m-value { font-size: 15px; color: #303133; font-weight: 500; }
+
+        /* 折叠区 */
+        .collapse { border: 1px solid #ebeef5; border-radius: 6px; margin-bottom: 12px; overflow: hidden; }
+        .collapse-head {
+            padding: 12px 16px;
+            background: #fafafa;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collapse-head .arrow { transition: transform 0.2s; }
+        .collapse.open .collapse-head .arrow { transform: rotate(90deg); }
+        .collapse-body { display: none; padding: 16px; }
+        .collapse.open .collapse-body { display: block; }
+
+        /* 逐小时 */
+        .hours {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        .hour {
+            flex: 0 0 80px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+        .h-time { font-size: 12px; color: #606266; }
+        .h-icon { font-size: 22px; margin: 4px 0; }
+        .h-wea { font-size: 12px; margin-bottom: 2px; }
+        .h-temp { font-size: 14px; font-weight: 600; }
+        .h-wind { font-size: 11px; color: #909399; }
+
+        /* 生活指数 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .index-item {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+        .i-title { font-size: 13px; color: #606266; }
+        .i-level { font-size: 16px; font-weight: 600; color: #409eff; margin: 4px 0; }
+        .i-desc { font-size: 12px; color: #909399; line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; }
+            .hero-right { width: 100%; }
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+            .metric.wide { grid-column: span 2; }
+            .index-grid { grid-template-columns: repeat(2, 1fr); }
+            .air-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .metrics, .index-grid { grid-template-columns: 1fr; }
+            .metric.wide { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div id="loading" class="loading">天气数据加载中...</div>
+
+    <div id="content" style="display: none;">
+        <div class="search-bar">
+            <input id="cityInput" type="text" placeholder="输入城市名称，如：北京">
+            <button id="searchBtn">搜索</button>
+        </div>
+
+        <div id="hero"></div>
+        <div id="forecast"></div>
+        <div id="detail"></div>
+    </div>
+
+    <div id="empty" class="empty" style="display: none;">暂无天气数据</div>
+</div>
+
+<script>
+    // ===== 配置：后端天气接口地址 =====
+    // 本地开发默认 http://localhost:8080，部署后改成你后端的域名，例如：
+    // const API_BASE = 'https://你的后端域名'
+    const API_BASE = 'https://zccai.cn';
+
+    var weather = null;
+    var activeIndex = 0;
+    var cityInput = document.getElementById('cityInput');
+    var searchBtn = document.getElementById('searchBtn');
+    var loadingEl = document.getElementById('loading');
+    var contentEl = document.getElementById('content');
+    var emptyEl = document.getElementById('empty');
+    var heroEl = document.getElementById('hero');
+    var forecastEl = document.getElementById('forecast');
+    var detailEl = document.getElementById('detail');
+
+    // 天气图标：wea_img 编码 -> emoji
+    var iconMap = {
+        qing: '☀️', yun: '⛅', yin: '☁️', yu: '🌧️', lei: '⛈️',
+        xue: '🌨️', wu: '🌫️', shachen: '🌪️', bingbao: '🧊', wumai: '🌫️',
+        dongyu: '🌧️', xiaoyu: '🌦️', zhongyu: '🌧️', dayu: '🌧️',
+        zhenyu: '🌦️', qiangzhenyu: '⛈️', dabaoyu: '🌧️', tedabaoyu: '🌧️',
+        xiaoxue: '🌨️', zhongxue: '❄️', daxue: '❄️', yujiaxue: '🌨️',
+        xuejiayu: '🌨️', feng: '💨', jufeng: '🌀', taifeng: '🌀'
+    };
+
+    function icon(code) { return iconMap[code] || '☁️'; }
+    function fmt(v) { return (v === null || v === undefined || v === '') ? '-' : v; }
+    function deg(v) { return (v === null || v === undefined || v === '') ? '-' : (v + '°'); }
+    function windText(win) {
+        if (Array.isArray(win)) {
+            return win.filter(Boolean).join(' / ') || '-';
+        }
+        return fmt(win);
+    }
+    function esc(s) {
+        return String(s === null || s === undefined ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function load() {
+        fetchWeather();
+    }
+
+    function fetchWeather(city) {
+        loadingEl.style.display = 'block';
+        contentEl.style.display = 'none';
+        emptyEl.style.display = 'none';
+
+        var url = API_BASE + '/api/weather';
+        if (city) { url += '?city=' + encodeURIComponent(city); }
+
+        fetch(url)
+            .then(function (res) { return res.json(); })
+            .then(function (res) {
+                if (res.code === 200 && res.data) {
+                    weather = res.data;
+                    activeIndex = 0;
+                    render();
+                } else {
+                    throw new Error(res.message || '天气查询失败');
+                }
+            })
+            .catch(function (err) {
+                alert(err.message || '天气数据加载失败');
+                loadingEl.style.display = 'none';
+                emptyEl.style.display = 'block';
+            });
+    }
+
+    function render() {
+        loadingEl.style.display = 'none';
+
+        if (!weather) {
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        contentEl.style.display = 'block';
+        renderHero();
+        renderForecast();
+        renderDetail();
+    }
+
+    function renderHero() {
+        var today = weather.data && weather.data[0];
+        var aqi = weather.aqi;
+
+        var html = '<div class="hero-left">';
+        html += '<div class="location"><span class="city">' + esc(weather.city) + '</span>';
+        if (weather.country) { html += '<span class="country">' + esc(weather.country) + '</span>'; }
+        html += '</div>';
+        html += '<div class="update-time">更新时间：' + esc(weather.update_time) + '</div>';
+        if (today) {
+            html += '<div class="today"><span class="today-icon">' + icon(today.wea_img) + '</span>';
+            html += '<div><div class="today-wea">' + esc(today.wea) + '</div>';
+            html += '<div class="today-temp"><span class="high">' + esc(today.tem1) + '°</span>';
+            html += '<span class="low">/ ' + esc(today.tem2) + '°</span></div></div></div>';
+        }
+        html += '</div>';
+
+        if (aqi) {
+            html += '<div class="hero-right">';
+            html += '<div class="air-title">空气质量</div>';
+            html += '<div class="air-level">' + esc(fmt(aqi.air_level)) + '</div>';
+            html += '<div class="air-tips">' + esc(fmt(aqi.air_tips)) + '</div>';
+            html += '<div class="air-grid">';
+            html += airItem('PM2.5', aqi.pm25);
+            html += airItem('PM10', aqi.pm10);
+            html += airItem('O₃', aqi.o3);
+            html += airItem('NO₂', aqi.no2);
+            html += airItem('SO₂', aqi.so2);
+            html += airItem('CO', aqi.co);
+            html += '</div>';
+            html += '<div class="air-advice">';
+            if (aqi.kouzhao) { html += '<span>口罩：' + esc(aqi.kouzhao) + '</span>'; }
+            if (aqi.waichu) { html += '<span>外出：' + esc(aqi.waichu) + '</span>'; }
+            if (aqi.yundong) { html += '<span>运动：' + esc(aqi.yundong) + '</span>'; }
+            if (aqi.kaichuang) { html += '<span>开窗：' + esc(aqi.kaichuang) + '</span>'; }
+            if (aqi.jinghuaqi) { html += '<span>净化器：' + esc(aqi.jinghuaqi) + '</span>'; }
+            html += '</div></div>';
+        }
+
+        heroEl.innerHTML = html;
+    }
+
+    function airItem(label, value) {
+        return '<div class="air-item"><span class="label">' + label + '</span>' +
+            '<span class="value">' + esc(fmt(value)) + '</span></div>';
+    }
+
+    function renderForecast() {
+        var days = weather.data || [];
+        if (!days.length) {
+            forecastEl.innerHTML = '';
+            return;
+        }
+
+        var html = '<div class="block"><div class="block-title">7天预报</div><div class="forecast">';
+        days.forEach(function (d, i) {
+            var cls = i === activeIndex ? 'forecast-item active' : 'forecast-item';
+            html += '<div class="' + cls + '" data-index="' + i + '">';
+            html += '<div class="f-day">' + esc(d.day) + '</div>';
+            html += '<div class="f-icon">' + icon(d.wea_img) + '</div>';
+            html += '<div class="f-wea">' + esc(d.wea) + '</div>';
+            html += '<div class="f-temp"><span class="high">' + esc(d.tem1) + '°</span>';
+            html += '<span class="low">' + esc(d.tem2) + '°</span></div>';
+            html += '</div>';
+        });
+        html += '</div></div>';
+        forecastEl.innerHTML = html;
+
+        forecastEl.querySelectorAll('.forecast-item').forEach(function (el) {
+            el.addEventListener('click', function () {
+                activeIndex = parseInt(el.getAttribute('data-index'), 10);
+                renderForecast();
+                renderDetail();
+            });
+        });
+    }
+
+    function renderDetail() {
+        var current = weather.data && weather.data[activeIndex];
+        if (!current) {
+            detailEl.innerHTML = '';
+            return;
+        }
+
+        var html = '<div class="block"><div class="block-title">' + esc(current.day) + ' 详情</div>';
+
+        if (current.alarm && current.alarm.alarm_type) {
+            html += '<div class="alarm"><div class="alarm-head">' +
+                esc(current.alarm.alarm_type + ' ' + current.alarm.alarm_level + '预警') +
+                '</div><div>' + esc(current.alarm.alarm_content) + '</div></div>';
+        }
+
+        html += '<div class="metrics">';
+        html += metric('实时温度', deg(current.tem));
+        html += metric('最高 / 最低', deg(current.tem1) + ' / ' + deg(current.tem2));
+        html += metric('白天 / 夜间', fmt(current.wea_day) + ' / ' + fmt(current.wea_night));
+        html += metric('湿度', fmt(current.humidity));
+        html += metric('能见度', fmt(current.visibility));
+        html += metric('气压', fmt(current.pressure));
+        html += metric('风向 / 风力', windText(current.win) + ' ' + fmt(current.win_speed));
+        html += metric('日出 / 日落', fmt(current.sunrise) + ' / ' + fmt(current.sunset));
+        html += metric('空气质量', fmt(current.air) + ' ' + fmt(current.air_level));
+        html += metric('空气提示', fmt(current.air_tips), true);
+        html += '</div>';
+
+        // 逐小时
+        html += '<div class="collapse" id="collapse-hours">';
+        html += '<div class="collapse-head"><span>逐小时天气</span><span class="arrow">▶</span></div>';
+        html += '<div class="collapse-body">';
+        if (current.hours && current.hours.length) {
+            html += '<div class="hours">';
+            current.hours.forEach(function (h) {
+                html += '<div class="hour">';
+                html += '<div class="h-time">' + esc(h.hours) + '</div>';
+                html += '<div class="h-icon">' + icon(h.wea_img) + '</div>';
+                html += '<div class="h-wea">' + esc(h.wea) + '</div>';
+                html += '<div class="h-temp">' + esc(h.tem) + '°</div>';
+                html += '<div class="h-wind">' + esc(h.win) + ' ' + esc(h.win_speed) + '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+        } else {
+            html += '<div class="empty">暂无逐小时数据</div>';
+        }
+        html += '</div></div>';
+
+        // 生活指数
+        html += '<div class="collapse" id="collapse-index">';
+        html += '<div class="collapse-head"><span>生活指数</span><span class="arrow">▶</span></div>';
+        html += '<div class="collapse-body">';
+        if (current.index && current.index.length) {
+            html += '<div class="index-grid">';
+            current.index.forEach(function (item) {
+                html += '<div class="index-item">';
+                html += '<div class="i-title">' + esc(item.title) + '</div>';
+                html += '<div class="i-level">' + esc(item.level) + '</div>';
+                html += '<div class="i-desc">' + esc(item.desc) + '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+        } else {
+            html += '<div class="empty">暂无生活指数</div>';
+        }
+        html += '</div></div>';
+
+        html += '</div>';
+        detailEl.innerHTML = html;
+
+        // 折叠交互
+        detailEl.querySelectorAll('.collapse').forEach(function (el) {
+            el.querySelector('.collapse-head').addEventListener('click', function () {
+                el.classList.toggle('open');
+            });
+        });
+    }
+
+    function metric(label, value, wide) {
+        var cls = wide ? 'metric wide' : 'metric';
+        return '<div class="' + cls + '"><span class="m-label">' + label + '</span>' +
+            '<span class="m-value">' + esc(value) + '</span></div>';
+    }
+
+    searchBtn.addEventListener('click', function () {
+        var city = cityInput.value.trim();
+        searchBtn.disabled = true;
+        fetchWeather(city || undefined);
+        setTimeout(function () { searchBtn.disabled = false; }, 1500);
+    });
+
+    cityInput.addEventListener('keyup', function (e) {
+        if (e.key === 'Enter') { searchBtn.click(); }
+    });
+
+    load();
+</script>
+</body>
+</html>
