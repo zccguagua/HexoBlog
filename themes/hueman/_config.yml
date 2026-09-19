@@ -29,7 +29,7 @@ customize:
     thumbnail: true # enable posts thumbnail, options: true, false
     favicon: /images/icon/iconOrangeMedium.ico # path to favicon
     social_links: # for more icons, please see http://fontawesome.io/icons/#brand
-        blog: https://zccode.cn/
+        blog: https://zccai.cn/
         instagram: https://www.instagram.com/g.p.orange/
         github: https://github.com/zccguagua
         weibo: https://weibo.com/u/3247224430?is_hot=1
@@ -39,8 +39,8 @@ customize:
 widgets:
     - catalog
     - recent_posts
-    - category
     - tagcloud
+    - category
     - links
     - myleft
 #    - archive
@@ -133,7 +133,7 @@ miscellaneous:
         twitter_id:
     links:
         Theme: https://github.com/ppoffice/hexo-theme-hueman
-        我的网站: https://www.zccai.cn
+        我的网站: https://zccai.cn
         微博: https://weibo.com/u/3247224430?is_hot=1
 
 poweredby: true
