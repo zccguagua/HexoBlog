@@ -2,7 +2,10 @@
 title: 记录VM虚拟机上安装macOS14
 date: 2024-03-09 12:33:06
 tags:
-    - 虚拟机
+  - 虚拟机
+  - 知识
+categories:
+  - 知识
 ---
 ![](https://www.freedidi.com/wp-content/uploads/2023/07/s88f056do94b1.png "macOS")
 

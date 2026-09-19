@@ -2,7 +2,9 @@
 title: Kotlin扩展函数
 date: 2022-07-07 23:47:15
 tags:
-    - Kotlin
+  - Android
+categories:
+  - Android
 ---
 ![](https://www.runoob.com/wp-content/uploads/2017/05/kotlin_250x250.png "kotlin")
 

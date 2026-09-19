@@ -2,7 +2,10 @@
 title: 小皮面板搭建nextcloud网盘 
 date: 2021-11-14 15:32:01
 tags:
-        - nextcloud
+  - nextcloud
+  - 服务器
+categories:
+  - 服务器
 
 ---
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_19.jpg "nextcloud")

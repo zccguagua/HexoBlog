@@ -3,6 +3,8 @@ title: ChatGPT使用教程
 date: 2023-03-15 22:25:46
 tags:
     - ChatGPT
+categories:
+  - 知识
 ---
 ![ChatGPT](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/chatgpt/chatgpt_logo.png)
 ### 准备

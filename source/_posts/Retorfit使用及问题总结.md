@@ -1,10 +1,10 @@
 ---
-layout: w
 title: Retorfit使用及问题总结
 date: 2019-07-15 00:11:21
 tags:
-        - Android
-        - Retorfit
+  - Android
+categories:
+  - Android
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/watermelon.jpg "Image")

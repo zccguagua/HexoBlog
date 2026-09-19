@@ -2,7 +2,9 @@
 title: kotlin协程
 date: 2022-08-08 23:16:45
 tags:
-    - Kotlin
+   - Android
+categories:
+  - Android
 ---
 ![](https://www.runoob.com/wp-content/uploads/2017/05/kotlin_250x250.png "kotlin")
 

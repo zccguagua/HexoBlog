@@ -2,8 +2,9 @@
 title: Android问题与解答2
 date: 2018-09-25 00:17:44
 tags: 
-        - Android
-        - 下载
+  - Android
+categories:
+  - Android
 ---
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/highway.jpg "Image")
 

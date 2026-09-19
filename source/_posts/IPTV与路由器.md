@@ -2,7 +2,10 @@
 title: IPTV与路由器
 date: 2024-01-08 22:13:19
 tags:
-        - IPTV
+  - IPTV
+  - 知识
+categories:
+  - 知识
 ---
 ![机顶盒](https://gw.alicdn.com/imgextra/i4/1714128138/O1CN01IUQ0xM29zFpJgD4Xn_!!1714128138.jpg_Q75.jpg_.webp)
 ### 携号转网

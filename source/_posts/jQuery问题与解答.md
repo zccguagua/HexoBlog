@@ -2,7 +2,9 @@
 title: jQuery问题与解答
 date: 2018-07-26 00:12:46
 tags: 
-        - jQuery
+  - 前端
+categories:
+  - 前端
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/songshu.jpg "Image")

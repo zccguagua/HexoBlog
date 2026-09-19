@@ -2,8 +2,9 @@
 title: python爬取网易云音乐榜单
 date: 2020-03-15 02:04:57
 tags:
-        - python
-        - 爬虫
+  - 前端
+categories:
+  - 前端
 ---
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_06.jpg "Image")
 

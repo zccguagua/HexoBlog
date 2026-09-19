@@ -2,8 +2,9 @@
 title: Android手机刷机记录
 date: 2020-02-28 00:59:57
 tags:
-        - 刷机
-        - Android
+    - Android
+categories:
+  - Android
 ---
 
 

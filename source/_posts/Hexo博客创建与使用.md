@@ -2,8 +2,10 @@
 title: Hexo博客创建与使用
 date: 2018-05-21 23:24:14
 tags: 
-        - Hexo
-        - 域名
+  - Hexo
+  - 服务器
+categories:
+  - 服务器
 ---
 
 

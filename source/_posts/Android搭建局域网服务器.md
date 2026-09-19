@@ -2,8 +2,9 @@
 title: Android搭建局域网服务器
 date: 2020-06-30 22:14:28
 tags:
-        - 服务器
-        - Android
+    - Android
+categories:
+  - Android
 ---
 
 

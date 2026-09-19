@@ -2,8 +2,9 @@
 title: Android问题与解答4
 date: 2018-12-05 23:21:02
 tags: 
-        - Android
-        - 视频合并
+  - Android
+categories:
+  - Android
 
 ---
 

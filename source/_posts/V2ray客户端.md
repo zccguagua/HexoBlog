@@ -2,7 +2,9 @@
 title: V2ray客户端
 date: 2021-12-16 23:06:12
 tags:
-        - V2ray
+  - V2ray
+categories:
+  - 知识
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_18.jpg "nextcloud")

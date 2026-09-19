@@ -3,6 +3,8 @@ title: 电视m3u客户端
 date: 2024-02-05 01:17:14
 tags:
         - m3u8
+categories:
+  - 知识
 ---
 ![iptv](https://www.techybugz.com/wp-content/uploads/2018/06/IPTV-Pro-Apk1.jpg)
 

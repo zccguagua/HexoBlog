@@ -2,7 +2,10 @@
 title: 使用 Cloudflare Tunnel 绕过备案，安全暴露本地服务
 date: 2026-08-31 20:40:41
 tags:
-     - Cloudflare
+  - Cloudflare
+  - 服务器
+categories:
+  - 服务器
 ---
 ![image](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/watermelon.jpg)
 

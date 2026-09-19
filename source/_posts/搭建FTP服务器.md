@@ -2,7 +2,9 @@
 title: 搭建FTP服务器
 date: 2021-11-10 00:27:44
 tags:
-        - FTP
+  - 服务器
+categories:
+ - 服务器
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_20.jpg "ftp")

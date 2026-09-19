@@ -2,8 +2,9 @@
 title: 推流服务器与Android直播实现
 date: 2020-01-06 23:10:31
 tags:
-        - Android
-        - SRS
+  - Android
+categories:
+  - Android
 ---
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_04.jpg "Image")
 

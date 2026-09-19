@@ -2,7 +2,9 @@
 title: 阿里云Tomcat部署与配置
 date: 2018-11-08 23:11:14
 tags:
-        - 阿里云
+  - 服务器
+categories:
+  - 服务器
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/cat.jpg "Image")

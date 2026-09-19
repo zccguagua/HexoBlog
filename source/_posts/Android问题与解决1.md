@@ -2,8 +2,9 @@
 title: Android问题与解答1
 date: 2018-07-08 01:50:34
 tags:  
-        - Android
-        - .9图
+  - Android
+categories:
+  - Android
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/two_pigs.jpg "Image")

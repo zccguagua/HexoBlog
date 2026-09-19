@@ -3,6 +3,8 @@ title: Android问题与解答3
 date: 2018-10-08 00:42:31
 tags: 
         - Android
+categories:
+  - Android
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/yellowClothes.jpg "Image")

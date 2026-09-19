@@ -2,9 +2,9 @@
 title: Android问题与解决5
 date: 2019-10-13 14:09:00
 tags:  
-        - Android
-        - ping
-        - 定时器&线程池
+  - Android
+categories:
+  - Android
 ---
 
 ![](https://zccguagua.oss-cn-hangzhou.aliyuncs.com/images/blog/cover/ins_01.jpg "Image")

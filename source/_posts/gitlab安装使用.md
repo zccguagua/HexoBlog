@@ -2,7 +2,8 @@
 title: gitlab安装使用
 date: 2022-05-01 23:27:46
 tags:
-     - gitea
+  - gitea
+  - 服务器
 ---
 
 
